@@ -1,0 +1,6 @@
+framework module Pods_LinksControllerPlaygrounds {
+  umbrella header "Pods-LinksControllerPlaygrounds-umbrella.h"
+
+  export *
+  module * { export * }
+}

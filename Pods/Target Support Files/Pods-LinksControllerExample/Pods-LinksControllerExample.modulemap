@@ -1,0 +1,6 @@
+framework module Pods_LinksControllerExample {
+  umbrella header "Pods-LinksControllerExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
