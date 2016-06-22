@@ -8,6 +8,7 @@
 
 import Foundation
 
+import UIKit
 
 struct OpenUserProfileLinkAction: LinksAction {
     
@@ -19,7 +20,22 @@ struct OpenUserProfileLinkAction: LinksAction {
     }
     
     static func linkActionHandler() -> LinksActionHandler {
-        return { LinksActionHandlerParameters in
+        return { parameters in
+            
+            guard let rootViewController = parameters[LinkParameters.rootViewController] as? UIViewController else {
+                return false
+            }
+            
+            let profileViewController = UIViewController()
+            
+            if let view = profileViewController.view {
+                view.backgroundColor = .brownColor()
+            }
+            
+            rootViewController.presentViewController(profileViewController,
+                                                     animated: true,
+                                                     completion: nil)
+
             return true
         }
     }
@@ -28,11 +44,28 @@ struct OpenUserProfileLinkAction: LinksAction {
 struct ShowAnotherTabLinkAction: LinksAction {
     
     static func linkActionSchemeMap() -> [String : [String]] {
-        return [ "my-app" : ["show_tab_option/option"]]
+        return [ "my-app" : ["show_tab_option/:option"]]
     }
     
     static func linkActionHandler() -> LinksActionHandler {
-        return { LinksActionHandlerParameters in
+        return { parameters in
+            
+            guard let option = parameters["option"] as? String,
+                  let rootViewController = parameters[LinkParameters.rootViewController] as? UITabBarController else {
+                return false
+            }
+            
+            switch option {
+            case "option1":
+                rootViewController.selectedIndex = 0
+                
+            case "option2":
+                rootViewController.selectedIndex = 1
+                
+            default:
+                return false
+            }
+            
             return true
         }
     }
