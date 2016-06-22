@@ -30,7 +30,7 @@ extension LinksControllerOperation {
     }
 }
 
-class ThirdPartyLinksController: LinksController {
+class ThirdPartyLinksController: NSObject, LinksController {
     let factory : LinksActionFactory
     
     //MARK: LinksController protocol
